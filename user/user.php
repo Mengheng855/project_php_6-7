@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -531,17 +534,32 @@
             <!-- Right Section: Profile -->
             <div class="d-flex">
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle fa-2x"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
-                        </ul>
-                    </li>
+                    <?php   
+                        if(!isset($_SESSION['is_admin'])){
+                            echo '
+                                <div>
+                                    <a href="../auth/login.php" class="btn btn-outline-light">Login</a>
+                                    <a href="../auth/register.php" class="btn btn-outline-light">Register</a>
+                                </div>
+                            ';
+                        }else{
+                            echo '
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user-circle fa-2x"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="../auth/logout.php">Logout</a></li>
+                                    </ul>
+                                </li>
+
+                            ';
+                        }
+                     ?>
+                     
                 </ul>
             </div>
             

@@ -1,0 +1,65 @@
+CREATE TABLE `tbl_user` (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    profile VARCHAR(255),
+    is_admin TINYINT(1) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)ENGINE=InnoDB;
+CREATE TABLE `tbl_logo` (
+    logo_id INT AUTO_INCREMENT PRIMARY KEY,
+    logo VARCHAR(255) NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX idx_logo_user (user_id),
+
+    CONSTRAINT fk_logo_user
+        FOREIGN KEY (user_id)
+        REFERENCES tbl_user(user_id)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+CREATE TABLE `tbl_category` (
+    cate_id INT AUTO_INCREMENT PRIMARY KEY,
+    cate_name VARCHAR(100) NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX idx_category_user (user_id),
+
+    CONSTRAINT fk_category_user
+        FOREIGN KEY (user_id)
+        REFERENCES tbl_user(user_id)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+CREATE TABLE `tbl_product` (
+    pro_id INT AUTO_INCREMENT PRIMARY KEY,
+    pro_name VARCHAR(150) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    description TEXT,
+    image VARCHAR(255),
+    cate_id INT NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX idx_product_category (cate_id),
+    INDEX idx_product_user (user_id),
+
+    CONSTRAINT fk_product_category
+        FOREIGN KEY (cate_id)
+        REFERENCES tbl_category(cate_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_product_user
+        FOREIGN KEY (user_id)
+        REFERENCES tbl_user(user_id)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+
+

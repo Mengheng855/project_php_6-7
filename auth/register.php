@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="../assets/css/theme.min.css">
     <link rel="stylesheet" href="../assets/css/auth-custom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css">
 </head>
-<body>
+<body class="p-5">
     <!-- Animated Background Particles -->
+    <a href="../index.php" class="fs-1 text-light" style="cursor: pointer; display: inline-block;"><i class="bi bi-arrow-left"></i></a>
     <div class="particles"></div>
 
     <div class="auth-container">
@@ -24,7 +26,7 @@
             </div>
 
             <div class="auth-body">
-                <form action="register_process.php" method="POST" id="registerForm">
+                <form action="insert.php" method="POST" id="registerForm">
                     <div class="form-group">
                         <label for="username" class="form-label">
                             <i class="fas fa-user"></i> Username
@@ -46,7 +48,7 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Create a strong password" required>
                     </div>
 
-                    <button type="submit" class="auth-submit" data-original-text="Create Account">
+                    <button type="submit" name="register" class="auth-submit" data-original-text="Create Account">
                         <i class="fas fa-user-plus"></i> Create Account
                     </button>
                 </form>
