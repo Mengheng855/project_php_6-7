@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin']!=1){
+        header('location:../index.php');
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -25,6 +32,15 @@
     <!--! BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../assets/css/theme.min.css" />
     <!--! END: Custom CSS-->
+    <style>
+        .modal-backdrop {
+            z-index: 1040 !important;
+        }
+        .modal.fade,
+        .modal.show {
+            z-index: 1050 !important;
+        }
+    </style>
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
     <!--! WARNING: Respond.js doesn"t work if you view the page via file: !-->
     <!--[if lt IE 9]>

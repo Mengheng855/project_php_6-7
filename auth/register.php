@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +31,9 @@
             <div class="auth-body">
                 <form action="insert.php" method="POST" id="registerForm">
                     <div class="form-group">
+                        <?php 
+                            $_SESSION['insert']=2;
+                        ?>
                         <label for="username" class="form-label">
                             <i class="fas fa-user"></i> Username
                         </label>
