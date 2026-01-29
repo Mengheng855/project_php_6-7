@@ -4,6 +4,11 @@
         header('location:../index.php');
         exit;
     }
+    require '../connection.php';
+    $user_id=$_SESSION['user_id'];
+    $select_user="SELECT username,email,profile FROM tbl_user WHERE user_id='$user_id'";
+    $ex=$conn->query($select_user);
+    $row=mysqli_fetch_assoc($ex);
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -18,6 +23,8 @@
     <!--! The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags !-->
     <!--! BEGIN: Apps Title-->
     <title>Duralux || Dashboard</title>
+    <!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--! END:  Apps Title-->
     <!--! BEGIN: Favicon-->
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.ico" />
@@ -170,16 +177,21 @@
                     </div>
                     <div class="dropdown nxl-h-item">
                         <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside">
-                            <img src="../assets/images/avatar/1.png" alt="user-image" class="img-fluid user-avtar me-0" />
+                            <img src="<?= $row['profile'] ?>" alt="user-image" class="user-avtar rounded-circle" width="40px" height="40px" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-user-dropdown">
                             <div class="dropdown-header">
                                 <div class="d-flex align-items-center">
-                                    <img src="../assets/images/avatar/1.png" alt="user-image" class="img-fluid user-avtar" />
-                                    <div>
-                                        <h6 class="text-dark mb-0">Alexandra Della <span class="badge bg-soft-success text-success ms-1">PRO</span></h6>
-                                        <span class="fs-12 fw-medium text-muted">alex@example.com</span>
-                                    </div>
+                                    <?php 
+                                        
+                                        echo '
+                                        <img src="'.$row['profile'].'" alt="user-image" class="user-avtar rounded-circle" width="40px" height="40px" />
+                                        <div>
+                                            <h6 class="text-dark mb-0">'.$row['username'].' <span class="badge bg-soft-success text-success ms-1">PRO</span></h6>
+                                            <span class="fs-12 fw-medium text-muted">'.$row['email'].'</span>
+                                        </div>
+                                        ';
+                                     ?>
                                 </div>
                             </div>
                             <div class="dropdown-divider"></div>

@@ -12,6 +12,7 @@
             exit;
         }
         $_SESSION['is_admin']=$row['is_admin'];
+        $_SESSION['user_id']=$row['user_id'];
         if($row['is_admin']!=1){
             header('location:../user/user.php');
         }else{

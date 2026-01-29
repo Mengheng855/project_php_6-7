@@ -1,5 +1,4 @@
 </body>
-
 <script src="../assets/vendors/js/vendors.min.js"></script>
 <!-- vendors.min.js {always must need to be top} -->
 <script src="../assets/vendors/js/daterangepicker.min.js"></script>
