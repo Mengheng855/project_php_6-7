@@ -586,26 +586,20 @@
         <section class="category-section" id="categories">
             <h2 class="section-title">Shop By Category</h2>
             <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="category-card">
-                        <h3>Electronics</h3>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="category-card">
-                        <h3>Fashion</h3>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="category-card">
-                        <h3>Home & Garden</h3>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="category-card">
-                        <h3>Books</h3>
-                    </div>
-                </div>
+                <?php
+                    require '../connection.php';
+                    $select_category="SELECT cate_name FROM tbl_category";
+                    $ex=$conn->query($select_category);
+                    while($row=mysqli_fetch_assoc($ex)){
+                        echo '
+                            <div class="col-lg-3 col-md-6 mb-4">
+                                <div class="category-card">
+                                    <h3>'.$row['cate_name'].'</h3>
+                                </div>
+                            </div>
+                        ';
+                    }     
+                ?>
             </div>
         </section>
 
@@ -614,100 +608,38 @@
             <h2 class="section-title">Featured Products</h2>
             <div class="product-grid">
                 <!-- Product 1 -->
-                <div class="product-card">
-                    <div class="product-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-category">ELECTRONICS</span>
-                        <div class="product-name">Premium Laptop</div>
-                        <p class="product-description">High-performance laptop for professionals</p>
-                        <div class="product-footer">
-                            <span class="product-price">$1,299</span>
-                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add</button>
+                 <?php
+                    require '../connection.php';
+                    $select_product = "SELECT p.*,c.cate_id,c.cate_name,u.username FROM tbl_product as p
+                    INNER JOIN tbl_category as c
+                    ON p.cate_id=c.cate_id
+                    INNER JOIN tbl_user as u
+                    ON p.user_id=u.user_id 
+                    ";
+                    $ex = $conn->query($select_product);
+                    while ($row = mysqli_fetch_assoc($ex)) {
+                        echo '                        
+                        <div class="product-card">
+                            <div class="product-image" ">
+                                <img src="../dashboard/'.$row['image'].'" alt="">
+                            </div>
+                            <div class="product-info">
+                                <span class="product-category">'.$row['cate_name'].'</span>
+                                <div class="product-name">'.$row['pro_name'].'</div>
+                                <p class="product-description">'.$row['description'].'</p>
+                                <div class="product-footer">
+                                    <span class="product-price">'.$row['price'].'</span>
+                                    <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        ';
+                    }
+                    ?>
 
-                <!-- Product 2 -->
-                <div class="product-card">
-                    <div class="product-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <i class="fas fa-shirt"></i>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-category">FASHION</span>
-                        <div class="product-name">Designer T-Shirt</div>
-                        <p class="product-description">Comfortable and stylish daily wear</p>
-                        <div class="product-footer">
-                            <span class="product-price">$49</span>
-                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add</button>
-                        </div>
-                    </div>
-                </div>
+               
 
-                <!-- Product 3 -->
-                <div class="product-card">
-                    <div class="product-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                        <i class="fas fa-sofa"></i>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-category">HOME & GARDEN</span>
-                        <div class="product-name">Modern Sofa</div>
-                        <p class="product-description">Elegant sofa for your living room</p>
-                        <div class="product-footer">
-                            <span class="product-price">$599</span>
-                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card">
-                    <div class="product-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-category">BOOKS</span>
-                        <div class="product-name">Bestseller Novel</div>
-                        <p class="product-description">Award-winning fiction book</p>
-                        <div class="product-footer">
-                            <span class="product-price">$24</span>
-                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 5 -->
-                <div class="product-card">
-                    <div class="product-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-category">TECHNOLOGY</span>
-                        <div class="product-name">Smart Device</div>
-                        <p class="product-description">IoT enabled smart home device</p>
-                        <div class="product-footer">
-                            <span class="product-price">$199</span>
-                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 6 -->
-                <div class="product-card">
-                    <div class="product-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-                        <i class="fas fa-spa"></i>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-category">HEALTH & BEAUTY</span>
-                        <div class="product-name">Skincare Set</div>
-                        <p class="product-description">Premium organic skincare collection</p>
-                        <div class="product-footer">
-                            <span class="product-price">$89</span>
-                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add</button>
-                        </div>
-                    </div>
-                </div>
+              
             </div>
         </section>
     </main>

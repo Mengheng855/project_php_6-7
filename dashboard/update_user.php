@@ -12,5 +12,4 @@
         if($ex){
             header('location: user.php');
         }
-
     }

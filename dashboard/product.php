@@ -169,8 +169,7 @@ include '../pages/header.php';
                             type="file"
                             class="form-control"
                             id="image"
-                            name="image"
-                            required>
+                            name="image">
                     </div>
 
                     <!-- Category -->
@@ -231,16 +230,11 @@ include '../pages/header.php';
             const des = row.find('td:eq(3)').text().trim()
             const cate = row.find('td:eq(4)').data('cate-id');
             
-            
-
-            $('#id').val(id)
+            $('#pro_id').val(id)
             $('#pro_name').val(pro_name)
             $('#price').val(price)
             $('#description').val(des)
             $('#cate_id').val(String(cate));
-
-
-
         })
     })
 </script>
